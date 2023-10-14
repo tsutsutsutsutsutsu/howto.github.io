@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="60;url=!DOCTYPE html.html"> <!-- 60秒後にindex.htmlにリダイレクト -->
+    <title>60秒ごとに読み上げるページ</title>
+    <script>
+        // カウントダウン用の関数
+        function countdown() {
+            var seconds = 60; // カウントダウンの秒数
+            var countdownTimer = setInterval(function() {
+                document.getElementById('timer').textContent = seconds + ' 秒後に次のページに移動します';
+                seconds--;
+                if (seconds < 0) {
+                    clearInterval(countdownTimer);
+                }
+            }, 1000);
+        }
+        
+        window.onload = function() {
+            countdown(); // カウントダウンを開始
+            readUserInput4(); // 初回の読み上げ
+        };
+        
+        // ${userInput4} の内容を読み上げる関数
+        function readUserInput4() {
+            const userInput4 = sessionStorage.getItem('userInput4');
+            if (userInput4) {
+                const utterance = new SpeechSynthesisUtterance(userInput4);
+                speechSynthesis.speak(utterance);
+            }
+        }
+
+        // 60秒ごとに読み上げを繰り返す
+        setInterval(readUserInput4, 1000); // 60000ミリ秒（60秒）ごとに実行
+    </script>
+</head>
+<body>
+
+    <h1>Goal Set</h1>
+    <div id="timer"></div>
+    <div id="userInputDisplay"></div>
+    <div id="userInputDisplay1"></div>
+    <div id="userInputDisplay2"></div>
+    <div id="userInputDisplay3"></div>
+    <div id="userInputDisplay4"></div>
+    
+    <script>
+      // セッションストレージから入力内容を取得
+      const userInput = sessionStorage.getItem('userInput');
+      const userInputDisplay = document.getElementById('userInputDisplay');
+      
+      if (userInput) {
+          userInputDisplay.textContent = `目標： ${userInput}`;
+      } else {
+          userInputDisplay.textContent = "ユーザーの目標はありませんでした。";
+      }
+  </script>
+
+
+    <script>
+      // セッションストレージから入力内容を取得
+      const userInput1 = sessionStorage.getItem('userInput1');
+      const userInputDisplay1 = document.getElementById('userInputDisplay1');
+      
+      if (userInput1) {
+          userInputDisplay1.textContent = `すること： ${userInput1}`;
+      } else {
+          userInputDisplay1.textContent = "ユーザーのすることはありませんでした。";
+      }
+  </script>
+
+<script>
+  // セッションストレージから入力内容を取得
+  const userInput2 = sessionStorage.getItem('userInput2');
+  const userInputDisplay2 = document.getElementById('userInputDisplay2');
+  
+  if (userInput2) {
+      userInputDisplay2.textContent = `起こりそうな問題： ${userInput2}`;
+  } else {
+      userInputDisplay2.textContent = "ユーザーの問題はありませんでした。";
+  }
+</script>
+<script>
+  // セッションストレージから入力内容を取得
+  const userInput3 = sessionStorage.getItem('userInput3');
+  const userInputDisplay3 = document.getElementById('userInputDisplay3');
+  
+  if (userInput3) {
+      userInputDisplay3.textContent = `解決策： ${userInput3}`;
+  } else {
+      userInputDisplay3.textContent = "ユーザーの解決策はありませんでした。";
+  }
+</script>
+<script>
+  // セッションストレージから入力内容を取得
+  const userInput4 = sessionStorage.getItem('userInput4');
+  const userInputDisplay4 = document.getElementById('userInputDisplay4');
+  
+  if (userInput4) {
+      userInputDisplay4.textContent = `今からすること： ${userInput4}`;
+  } else {
+      userInputDisplay4.textContent = "ユーザーのすることはありませんでした。";
+  }
+</script>
+  
+</body>
+</html>
