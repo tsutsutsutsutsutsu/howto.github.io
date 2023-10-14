@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="refresh" content="60;url=index.html"> <!-- 60秒後にnext_page.htmlにリダイレクト -->
+    <script>
+        // カウントダウン用の関数
+        function countdown() {
+            var seconds = 60; // カウントダウンの秒数
+            var countdownTimer = setInterval(function() {
+                document.getElementById('timer').textContent = seconds + ' 秒後に次のページに移動します';
+                seconds--;
+                if (seconds < 0) {
+                    clearInterval(countdownTimer);
+                }
+            }, 1000);
+        }
+        
+        window.onload = function() {
+            countdown(); // カウントダウンを開始
+        };
+    </script>
+</head>
+<body>
+    <!-- カウントダウン表示 -->
+    <div id="timer"></div>
+    <!-- ここにページのコンテンツを追加 -->
+    <form id="userInputForm">
+      <label for="userInput">目標：</label>
+      <input type="text" id="userInput" name="userInput" placeholder="例: 海賊王になる" autocomplete="off">
+    </form>
+  
+  <script>
+    const userInputField = document.getElementById('userInput');
+    const userInputForm = document.getElementById('userInputForm');
+    
+    // テキストが変更されるたびに入力内容をセッションストレージに保存する関数
+    function saveUserInput() {
+        const userInput = userInputField.value;
+        sessionStorage.setItem('userInput', userInput);
+    }
+    
+    // フォームの送信を防止
+    userInputForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        saveUserInput();
+        // ページ遷移など、必要な処理を実行
+        window.location.href = 'index.html';
+    });
+    
+    // ページが読み込まれたときにセッションストレージから保存された入力内容を取得して表示
+    window.addEventListener('DOMContentLoaded', function() {
+        const userInput = sessionStorage.getItem('userInput');
+        if (userInput) {
+            userInputField.value = userInput;
+        }
+    });
+    
+    // テキストが変更されたら自動的に保存
+    userInputField.addEventListener('input', saveUserInput);
+</script>
+</body>
+</html>
