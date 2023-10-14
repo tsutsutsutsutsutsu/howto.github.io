@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="refresh" content="60;url=last.html"> <!-- 60秒後にindex.htmlにリダイレクト -->
+    <script>
+        // カウントダウン用の関数
+        function countdown() {
+            var seconds = 60; // カウントダウンの秒数
+            var countdownTimer = setInterval(function() {
+                document.getElementById('timer').textContent = seconds + ' 秒後に次のページに移動します';
+                seconds--;
+                if (seconds < 0) {
+                    clearInterval(countdownTimer);
+                }
+            }, 1000);
+        }
+        
+        window.onload = function() {
+            countdown(); // カウントダウンを開始
+        };
+    </script>
+</head>
+<body>
+
+    <h1>Goal Set</h1>
+    
+    <div id="userInputDisplay"></div>
+    <div id="userInputDisplay1"></div>
+    <div id="userInputDisplay2"></div>
+    <div id="userInputDisplay3"></div>
+    <div id="timer"></div>
+    <form id="userInputForm4">
+      <label for="userInput4">今から1分以内にすること：</label>
+      <input type="text" id="userInput4" name="userInput4" placeholder="例: ゾロに会いに行く" autocomplete="off">
+  </form>
+    <script>
+      // セッションストレージから入力内容を取得
+      const userInput = sessionStorage.getItem('userInput');
+      const userInputDisplay = document.getElementById('userInputDisplay');
+      
+      if (userInput) {
+          userInputDisplay.textContent = `目標： ${userInput}`;
+      } else {
+          userInputDisplay.textContent = "ユーザーの目標はありませんでした。";
+      }
+  </script>
+
+
+    <script>
+      // セッションストレージから入力内容を取得
+      const userInput1 = sessionStorage.getItem('userInput1');
+      const userInputDisplay1 = document.getElementById('userInputDisplay1');
+      
+      if (userInput1) {
+          userInputDisplay1.textContent = `すること： ${userInput1}`;
+      } else {
+          userInputDisplay1.textContent = "ユーザーのすることはありませんでした。";
+      }
+  </script>
+
+<script>
+  // セッションストレージから入力内容を取得
+  const userInput2 = sessionStorage.getItem('userInput2');
+  const userInputDisplay2 = document.getElementById('userInputDisplay2');
+  
+  if (userInput2) {
+      userInputDisplay2.textContent = `起こりそうな問題： ${userInput2}`;
+  } else {
+      userInputDisplay2.textContent = "ユーザーの問題はありませんでした。";
+  }
+</script>
+<script>
+  // セッションストレージから入力内容を取得
+  const userInput3 = sessionStorage.getItem('userInput3');
+  const userInputDisplay3 = document.getElementById('userInputDisplay3');
+  
+  if (userInput3) {
+      userInputDisplay3.textContent = `解決策： ${userInput3}`;
+  } else {
+      userInputDisplay3.textContent = "ユーザーの解決策はありませんでした。";
+  }
+</script>
+<script>
+  const userInputField4 = document.getElementById('userInput4');
+  const userInputForm4 = document.getElementById('userInputForm4');
+  
+  // テキストが変更されるたびに入力内容をセッションストレージに保存する関数
+  function saveUserInput4() {
+      const userInput4 = userInputField4.value;
+      sessionStorage.setItem('userInput4', userInput4);
+  }
+  
+  // ページが読み込まれたときにセッションストレージから保存された入力内容を取得して表示
+  window.addEventListener('DOMContentLoaded', function() {
+      const userInput4 = sessionStorage.getItem('userInput4');
+      if (userInput4) {
+          userInputField4.value = userInput4;
+      }
+  });
+  
+  // テキストが変更されたら自動的に保存
+  userInputField4.addEventListener('input', saveUserInput4);
+</script>
+  
+</body>
+</html>
